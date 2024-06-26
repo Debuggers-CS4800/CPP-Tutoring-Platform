@@ -4,7 +4,7 @@ import './Header.css';
 function Header() {
     return (
     <header className="header">
-        <img src = "https://www.cpp.edu/brand/img/thumb-primary-logo-horizontal-stacked.jpg"/>
+        <img src = "https://www.cpp.edu/engineering/img/branding/eng-two-row-color.png"/>
         <div className="logo">
             CPP-Tutoring Hub
         </div>

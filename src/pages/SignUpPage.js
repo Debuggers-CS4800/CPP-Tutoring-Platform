@@ -24,11 +24,12 @@ const SignupComponent = ({isOpen, onClose}) => {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const styling = {padding: "8%", 
-        height: "2%", 
+    const styling = {padding: "15px", 
+        margin: "10px",
+        height: "15px", 
         display: "flex",
         alignItems: "center"
-    }
+      }
 
     const authenticate = () => {
         createUserWithEmailAndPassword(auth, emailController, passwordController)
@@ -60,22 +61,26 @@ const SignupComponent = ({isOpen, onClose}) => {
             alignItems: "center",
             justifyContent: "center",
        }}>
-            <button onClick={onClose}>x</button>
             <div
                 style={{
                     background: "white",
-                    height: 170,
-                    width: 240,
+                    // height: 170,
+                    // width: 240,
                     margin: "auto",
                     padding: "7%",
                     border: "2px solid #000",
                     borderRadius: "10px",
                     boxShadow: "2px solid black",
                     display: "flex",
+                    flexDirection: "column",
                     flexWrap: "wrap",
                     alignItems: "center",
                     justifyContent: "center",
                 }}>
+                    <button onClick={onClose}
+                        style={{marginLeft: "auto", justifyContent:"flex-end"}}
+                    >x</button>
+
                     <h2>Sign Up</h2>
                     <input
                         style={styling} 
@@ -85,6 +90,7 @@ const SignupComponent = ({isOpen, onClose}) => {
                     />
                     <input
                         placeholder="Password"
+                        type='password'
                         style={styling}
                         value={passwordController}
                         onChange={(p) => setPassword(p.target.value)}

@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+# Dev Notes
+If you are getting an error for the router module not found, use "npm install react-router-dom" which will install the necessary modules
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

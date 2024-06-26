@@ -31,6 +31,8 @@
   
   .subject-info a:hover {
     text-decoration: underline;
+    background-color: rgb(232, 232, 232);
+    color: black;
   }
   
   .subject-image {

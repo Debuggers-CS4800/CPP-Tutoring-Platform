@@ -1,10 +1,10 @@
 # Dev Notes
 ### Error for the router module not found: 
-### `npm install react-router-dom' 
+### `npm install react-router-dom` 
 ### Error for firebase not found: 
-### 'npm install firebase'
+### `npm install firebase`
 ### Error for react-icons not found: 
-### 'npm install react-icons'
+### `npm install react-icons`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

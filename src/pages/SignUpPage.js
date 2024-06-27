@@ -8,21 +8,11 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
 
-const SignupComponent = ({isOpen, onClose}) => {
+const SignupComponent = ({isOpen, onClose, app}) => {
     const [emailController, setEmail] = useState("");
     const [passwordController, setPassword] = useState("");
     // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyB-jsQGHmxCDjf9k0SWMrjsS6R1E9gs4QI",
-        authDomain: "cs4800-cpp-tutorplatform.firebaseapp.com",
-        projectId: "cs4800-cpp-tutorplatform",
-        storageBucket: "cs4800-cpp-tutorplatform.appspot.com",
-        messagingSenderId: "692396275639",
-        appId: "1:692396275639:web:7bd1c939063bdda32b1a32"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
+    
     const auth = getAuth(app);
     const styling = {padding: "15px", 
         margin: "10px",

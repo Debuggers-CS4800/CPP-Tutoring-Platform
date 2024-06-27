@@ -1,7 +1,8 @@
-# Getting Started with Create React App
-
 # Dev Notes
-If you are getting an error for the router module not found, use "npm install react-router-dom" which will install the necessary modules
+Error for the router module not found:
+    Use "npm install react-router-dom" 
+Error for firebase not found:
+    Use "npm install firebase"
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -4,12 +4,16 @@
     display: flex;
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
+    bottom: 0;
+    position: fixed;
+    width: 100%;
   }
   
   .footer-content p {
     margin: 0;
     font-size: 25px;
     justify-content: center;
+    flex: 1
   }
   
   .social-links a {

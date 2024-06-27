@@ -5,6 +5,10 @@
     padding: 20px 40px;
     background-color: #f8f8f8;
     box-shadow: 0 4px 2px -2px black;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+    position: fixed;
   }
 
   .header img {

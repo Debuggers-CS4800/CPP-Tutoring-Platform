@@ -50,6 +50,7 @@ const SignupComponent = ({isOpen, onClose, app}) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            fontSize: "20px",
        }}>
             <div
                 style={{
@@ -73,7 +74,17 @@ const SignupComponent = ({isOpen, onClose, app}) => {
 
                     <h2>Sign Up</h2>
                     <input
-                        style={styling} 
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            border: '2px solid #ccc',
+                            padding: '10px',  // Adjust padding as needed
+                            width: '100%',     // Adjust width percentage or pixels
+                            boxSizing: 'border-box'  // Ensure padding and border are included in the width
+                        }} 
                         placeholder="CPP Email"
                         value={emailController}
                         onChange={(e) => setEmail(e.target.value)}
@@ -81,12 +92,31 @@ const SignupComponent = ({isOpen, onClose, app}) => {
                     <input
                         placeholder="Password"
                         type='password'
-                        style={styling}
+                        style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            border: '2px solid #ccc',
+                            padding: '10px',  // Adjust padding as needed
+                            width: '100%',     // Adjust width percentage or pixels
+                            boxSizing: 'border-box'  // Ensure padding and border are included in the width
+                          }} 
                         value={passwordController}
                         onChange={(p) => setPassword(p.target.value)}
                     />
                     <button 
-                        style={styling}
+                        style={{
+                        fontSize: "20px",
+                        padding: "10px 20px",
+                        margin: "0 5px",
+                        border: '2px solid #ccc',
+                        borderRadius: "5px",
+                        background: "#f8f8f8",
+                        cursor: "pointer",
+                        display: "flex",
+                        }}
                         onClick={authenticate}
                     >Sign Up</button>
             </div>

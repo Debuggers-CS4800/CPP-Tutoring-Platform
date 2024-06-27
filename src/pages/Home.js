@@ -30,7 +30,7 @@ function Home() {
                   subject="Science/Engineering"
                   description="CPP provides knowledgeable educators with advanced degrees in science and engineering disciplines. Our tutors specialize in guiding students through complex scientific and engineering concepts, offering personalized support to excel in coursework and projects."
                   linkText="Find Science Tutors Here!"
-                  subjectImage="https://lh3.googleusercontent.com/proxy/FUw9VlDm4gk9-3IpO__uN3JW6vi-j2P_2scSlnT1Cgj84WgoXgg1TwtYC7QK5qLiT1_qZZ0LIC47rjUZlWeZkLCoXlW9u8DRUdKkjQUd3GsUHxb0d1bse70KP7et"
+                  subjectImage="https://lh3.googleusercontent.com/proxy/Ki7Ep4UGFLQUIYe3Q4BlL50qi7rqGiL9XMgDDJSRLsIc3aze82aPkIwCyjP3HkdQqJg9TPL57K8q8kZPk2Og46FMaulR7CrlaaKKA6plX4PECd3MCHoPgV5THdP2"
                 />
               </main>
               <Footer />

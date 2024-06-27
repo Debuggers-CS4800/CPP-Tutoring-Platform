@@ -10,10 +10,10 @@ function Header() {
             CPP-Tutoring Hub
         </div>
         <nav className="nav">
+        <Link to="/Home">Home</Link>
         <Link to="/Search">Search</Link>
         <Link to="/About">About</Link>
         <Link to="/Login">Login</Link>
-        <Link to="/Help">Help</Link>
         </nav>
     </header>
     );

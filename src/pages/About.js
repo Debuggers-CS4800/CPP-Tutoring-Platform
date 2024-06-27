@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import './components/About.css';
 
 function About() {
   return (
@@ -12,7 +13,7 @@ function About() {
 
         <p>
           Welcome to our CPP Tutoring Platform, this is going to be your solution to find and connect with
-          tutors at Cal Poly Pomona. Our platform's goal is to basically simplify the process of finding the
+          tutors at Cal Poly Pomona. Our platform's goal is to simplify the process of finding the
           right and most convenient tutor for a students' specific course needs.
         </p>
 

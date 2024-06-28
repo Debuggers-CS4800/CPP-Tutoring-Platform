@@ -1,10 +1,19 @@
+.Search {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	/* padding-top: 20px; */
+	/* min-height: 20vh;  */
+	box-sizing: border-box;
+}
+
 .search-bar-container {
-  padding-top: 10vh;
+  padding-top: 6%;
   width: 40%;
   margin: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-width: 200px;
 }
 
@@ -44,10 +53,51 @@ input:focus {
 	width: 100%;
 	background-color: white;
 	display: flex;
-  flex-direction: column;
+  	flex-direction: column;
 	box-shadow: 0px 0px 8px #ddd;
 	border-radius: 10px;
 	margin-top: 1rem;
 	max-height: 300px;
 	overflow-y: scroll;
 }
+
+/* Grid container setup */
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(1, minmax(250px, 1fr));
+	gap: 20px;
+	padding-top: 1%;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 10%;
+	overflow: hidden;
+	width: 80%;
+  }
+  
+  /* Grid item styling */
+  .grid-item {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 20px;
+	background-color: #f9f9f9;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s;
+	transform-origin: center;
+	height: 300px;
+  }
+  
+  /* Grid item hover effect */
+  .grid-item:hover {
+	transform: scale(1.05);
+	z-index: 0;
+  }
+  
+  /* Heading and paragraph styling inside grid item */
+  .grid-item h2 {
+	margin-top: 0;
+	font-size: 40px;
+  }
+  
+  .grid-item p {
+	margin: 10px 0;
+  }

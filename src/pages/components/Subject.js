@@ -1,13 +1,15 @@
 import React from 'react';
 import './Subject.css';
+import { BrowserRouter as Router, Switch, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-function Subject({ subject, description, linkText, subjectImage }) {
+function Subject({ subject, description, linkText, subjectImage, linkTo }) {
   return (
     <section className="subject">
       <div className="subject-info">
         <h2>{subject}</h2>
         <p>{description}</p>
-        <a href="#">&#x2192; {linkText} </a>
+        <Link to={linkTo}>&#x2192; {linkText}</Link>
       </div>
       <div className="subject-image">
         <img src={subjectImage} alt={subject} />

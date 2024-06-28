@@ -9,6 +9,7 @@
     box-sizing: border-box;
     top: 0;
     position: fixed;
+    z-index: 2;
   }
 
   .header img {

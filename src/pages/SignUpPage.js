@@ -1,128 +1,121 @@
-import React from "react"
-import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { auth, db } from '../firebase'; // updated the import path
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+const SignupComponent = ({ isOpen, onClose }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [subject, setSubject] = useState("");
 
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
+      await setDoc(doc(db, 'users', user.uid), {
+        uid: user.uid,
+        name,
+        email,
+        subject,
+        createdAt: new Date(),
+      });
 
-
-const SignupComponent = ({isOpen, onClose, app}) => {
-    const [emailController, setEmail] = useState("");
-    const [passwordController, setPassword] = useState("");
-    // Your web app's Firebase configuration
-    
-    const auth = getAuth(app);
-    const styling = {padding: "15px", 
-        margin: "10px",
-        height: "15px", 
-        display: "flex",
-        alignItems: "center"
-      }
-
-    const authenticate = () => {
-        createUserWithEmailAndPassword(auth, emailController, passwordController)
-        .then((userCredential) => {
-            // Signed up 
-            const user = userCredential.user;
-            console.log(user);
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-        });
+      console.log('User profile created successfully');
+      onClose(); // closes the sign-up modal after successful sign-up
+    } catch (error) {
+      console.error('Error creating user profile:', error);
     }
-    
+  };
 
-    if (!isOpen) return null;
-    return(
-       <div
-        style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background: "rgba(0, 0, 0, 0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "20px",
-       }}>
-            <div
-                style={{
-                    background: "white",
-                    // height: 170,
-                    // width: 240,
-                    margin: "auto",
-                    padding: "7%",
-                    border: "2px solid #000",
-                    borderRadius: "10px",
-                    boxShadow: "2px solid black",
-                    display: "flex",
-                    flexDirection: "column",
-                    flexWrap: "wrap",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}>
-                    <button onClick={onClose}
-                        style={{marginLeft: "auto", justifyContent:"flex-end"}}
-                    >x</button>
-
-                    <h2>Sign Up</h2>
-                    <input
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            border: '2px solid #ccc',
-                            padding: '10px',  // Adjust padding as needed
-                            width: '100%',     // Adjust width percentage or pixels
-                            boxSizing: 'border-box'  // Ensure padding and border are included in the width
-                        }} 
-                        placeholder="CPP Email"
-                        value={emailController}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        placeholder="Password"
-                        type='password'
-                        style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            border: '2px solid #ccc',
-                            padding: '10px',  // Adjust padding as needed
-                            width: '100%',     // Adjust width percentage or pixels
-                            boxSizing: 'border-box'  // Ensure padding and border are included in the width
-                          }} 
-                        value={passwordController}
-                        onChange={(p) => setPassword(p.target.value)}
-                    />
-                    <button 
-                        style={{
-                        fontSize: "20px",
-                        padding: "10px 20px",
-                        margin: "0 5px",
-                        border: '2px solid #ccc',
-                        borderRadius: "5px",
-                        background: "#f8f8f8",
-                        cursor: "pointer",
-                        display: "flex",
-                        }}
-                        onClick={authenticate}
-                    >Sign Up</button>
-            </div>
-       </div>
-    ); 
-}
-
+  if (!isOpen) return null;
+  return (
+    <div style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      background: "rgba(0, 0, 0, 0.5)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: "20px",
+    }}>
+      <div style={{
+        background: "white",
+        margin: "auto",
+        padding: "7%",
+        border: "2px solid #000",
+        borderRadius: "10px",
+        boxShadow: "2px solid black",
+        display: "flex",
+        flexDirection: "column",
+        flexWrap: "wrap",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+        <button onClick={onClose} style={{ marginLeft: "auto", justifyContent: "flex-end" }}>x</button>
+        <h2>Sign Up</h2>
+        <input
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={{
+            padding: '10px',
+            width: '100%',
+            boxSizing: 'border-box',
+            margin: '10px 0'
+          }}
+        />
+        <input
+          placeholder="Subject"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          style={{
+            padding: '10px',
+            width: '100%',
+            boxSizing: 'border-box',
+            margin: '10px 0'
+          }}
+        />
+        <input
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{
+            padding: '10px',
+            width: '100%',
+            boxSizing: 'border-box',
+            margin: '10px 0'
+          }}
+        />
+        <input
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{
+            padding: '10px',
+            width: '100%',
+            boxSizing: 'border-box',
+            margin: '10px 0'
+          }}
+        />
+        <button onClick={handleSignUp} style={{
+          fontSize: "20px",
+          padding: "10px 20px",
+          margin: "10px 0",
+          border: '2px solid #ccc',
+          borderRadius: "5px",
+          background: "#f8f8f8",
+          cursor: "pointer",
+        }}>Sign Up</button>
+      </div>
+    </div>
+  );
+};
 
 export default SignupComponent;

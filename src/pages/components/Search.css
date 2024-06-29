@@ -9,7 +9,7 @@
 }
 
 .search-bar-container {
-  padding-top: 6%;
+  padding-top: 10%;
   width: 40%;
   margin: auto;
   display: flex;
@@ -53,7 +53,7 @@ input:focus {
 	width: 100%;
 	background-color: white;
 	display: flex;
-  	flex-direction: column;
+  flex-direction: column;
 	box-shadow: 0px 0px 8px #ddd;
 	border-radius: 10px;
 	margin-top: 1rem;
@@ -71,33 +71,33 @@ input:focus {
 	padding-right: 10%;
 	padding-bottom: 10%;
 	overflow: hidden;
-	width: 80%;
-  }
+	width: 70%;
+ }
   
   /* Grid item styling */
   .grid-item {
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	padding: 20px;
-	background-color: #f9f9f9;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	transition: transform 0.2s;
-	transform-origin: center;
-	height: 300px;
+  	border: 0.5px solid #ccc;
+  	border-radius: 5px;
+  	padding: 20px;
+  	background-color: #f9f9f9;
+  	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  	transition: transform 0.2s;
+  	transform-origin: center;
+  	height: 300px;
   }
   
   /* Grid item hover effect */
   .grid-item:hover {
-	transform: scale(1.05);
-	z-index: 0;
+  	transform: scale(1.05);
+  	z-index: 0;
   }
   
   /* Heading and paragraph styling inside grid item */
   .grid-item h2 {
-	margin-top: 0;
-	font-size: 40px;
+  	margin-top: 0;
+  	font-size: 35px;
   }
   
   .grid-item p {
-	margin: 10px 0;
+	  margin: 10px 0;
   }

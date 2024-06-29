@@ -1,24 +1,37 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useState } from 'react';
-import { auth } from '../firebase'; // updated the import path
+import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../firebase'; // updated the import path
 import SignupComponent from './SignUpPage';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
 function Login() {
   const [open, setOpen] = useState(false);
-  const [emailController, setEmail] = useState("");
-  const [passwordController, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const authenticate = () => {
-    signInWithEmailAndPassword(auth, emailController, passwordController)
-      .then((userCredential) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
         const user = userCredential.user;
         console.log(userCredential);
+        
+        // fetch user name from Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          const userName = userDoc.data().name;
+          localStorage.setItem("userName", userName); // then store user's name in localStorage
+        }
+
+        navigate("/home"); // redirects to home page
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
+        setError(errorMessage);
         console.error(errorMessage);
       });
   }
@@ -36,7 +49,7 @@ function Login() {
       <h1>Please Log In or Register a New Account</h1>
       <input
         placeholder="CPP Email"
-        value={emailController}
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
         style={{
           padding: '10px',
@@ -44,13 +57,13 @@ function Login() {
           boxSizing: 'border-box',
           margin: '10px 0',
           border: '2px solid #ccc',
-          borderRadius: "5px",
+          borderRadius: '4px'
         }}
       />
       <input
         placeholder="Password"
         type="password"
-        value={passwordController}
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
         style={{
           padding: '10px',
@@ -58,9 +71,10 @@ function Login() {
           boxSizing: 'border-box',
           margin: '10px 0',
           border: '2px solid #ccc',
-          borderRadius: "5px",
+          borderRadius: '4px'
         }}
       />
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <div className="button-container" style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
         <button onClick={authenticate} style={{
           fontSize: "20px",

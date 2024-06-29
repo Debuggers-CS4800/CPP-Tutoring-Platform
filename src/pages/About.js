@@ -38,11 +38,12 @@ function About() {
         <h2>The Key Features</h2>
 
         <ul>
-          <li><strong>Search and Filter:</strong> Find tutors based on your specific needs and preferences.</li>
-          <li><strong>Account Management:</strong> Create and manage user accounts for both tutees and tutors.</li>
-          <li><strong>Messaging System:</strong> ?Communicate directly with tutors through our built-in messaging system?</li>
-          <li><strong>Booking Sessions:</strong> Book tutoring sessions directly from the platform.</li>
-          <li><strong>Notifications:</strong> Receive notifications for booking confirmations and session reminders.</li>
+          <li><strong>Search and Filter:</strong> Find tutors based on your specific needs and preferences </li>
+          <li><strong>Account Management:</strong> Create user accounts for both tutees and tutors </li>
+          <li><strong>Account Management:</strong>Manage user accounts for both tutees and tutors <strong>*Feature still in development*</strong> </li>
+          <li><strong>Messaging System:</strong> Communicate directly with tutors through our built-in messaging system <strong>*Feature still in development*</strong></li>
+          <li><strong>Booking Sessions:</strong> Book tutoring sessions directly from the platform <strong>*Feature still in development*</strong></li>
+          <li><strong>Notifications:</strong> Receive notifications for booking confirmations and session reminders <strong>*Feature still in development*</strong></li>
         </ul>
 
         <h2>Contact Us</h2>

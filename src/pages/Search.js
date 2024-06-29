@@ -1,36 +1,47 @@
-import React from 'react';
-import {useState} from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import "./components/Search.css";
-import {FaSearch} from "react-icons/fa"
+import { FaSearch } from "react-icons/fa";
+import { doc, collection, getDocs, query, where, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function Search() {
   const [search, setSearch] = useState([]);
+  const [users, setUsers] = useState([]);
+  const collectionRef = collection(db, 'users');
 
-  // This is just a stand-in for data
-  const items = [
-    { id: 1, title: 'Arvind dakrishman', subject: 'Masters in Mathematics',
-      MoI: 'Online', certification: 'Bachelors in Mathematics', 
-      description: 'I have been tutoring for 20 years and all my tutees always get all As.',
-      accountType: 'tutor' },
-    { id: 2, title: 'Tutor 2', subject: 'science',
-      MoI: "Online", certification: 'Education',
-      description: 'text', accountType: 'tutor' },
-    { id: 3, title: 'Science', subject: 'subject',
-      MoI: "Online", certification: 'Education',
-      description: 'text', accountType: 'tutor' },
-    { id: 4, title: 'Tutor 4', subject: 'subject',
-      MoI: "Online", certification: 'Education',
-      description: 'text', accountType: 'tutor' },
-    { id: 5, title: 'Student 5', subject: 'subject',
-      MoI: "Online", certification: 'Education',
-      description: 'text', accountType: 'student' },
-  ];
+  // get function
+  useEffect(() => {
+    const getUsers = async () => {
+      const querySnapshot = await getDocs(collectionRef);
+      const items = [];
+      querySnapshot.forEach((doc) => { items.push(doc.data()) });
+      setUsers(items);
+    };
 
+    try {
+      getUsers();
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  // from firestore documentation
+  /*
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'users'), (querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setUsers(items);
+    });
+    
+    //return () => unsubscribe();
+  }); */
   
-
-
   return (
     <div className="Search">
       <Header />
@@ -43,21 +54,21 @@ function Search() {
   		  </div>	
       </div> 
       <div className="grid-container">
-        {items
+        {users
           .filter((item) => {
-            return search.toString().toLowerCase() === '' 
-              ? item.accountType.toString().toLowerCase().includes('tutor')
-              : (item.title.toString().toLowerCase().includes(search) ||
-              item.subject.toString().toLowerCase().includes(search)) &&
-              item.accountType.toString().toLowerCase().includes('tutor');
+            if (item.isTutor) {
+              return search.toString().toLowerCase() === '' ? 
+              item :
+              item.name.toString().toLowerCase().includes(search) || // allows for search of name, subject, or email
+              item.subject.toString().toLowerCase().includes(search) ||
+              item.email.toString().toLowerCase().includes(search);
+            }
           })
           .map(item => (
             <div key={item.id} className="grid-item">
-              <h2>{item.title}</h2>
+              <h2>{item.name}</h2>
               <p>Subject: {item.subject}</p>
-              <p>Mode of Instruction: {item.MoI}</p>
-              <p>Certification: {item.certification}</p>
-              <p>Description: {item.description}</p>
+              <p>Email: {item.email}</p>
             </div>
           ))}
       </div>

@@ -42,7 +42,9 @@ function Login() {
           padding: '10px',
           width: '30%',
           boxSizing: 'border-box',
-          margin: '10px 0'
+          margin: '10px 0',
+          border: '2px solid #ccc',
+          borderRadius: "5px",
         }}
       />
       <input
@@ -54,7 +56,9 @@ function Login() {
           padding: '10px',
           width: '30%',
           boxSizing: 'border-box',
-          margin: '10px 0'
+          margin: '10px 0',
+          border: '2px solid #ccc',
+          borderRadius: "5px",
         }}
       />
       <div className="button-container" style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>

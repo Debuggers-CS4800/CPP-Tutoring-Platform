@@ -67,7 +67,9 @@ const SignupComponent = ({ isOpen, onClose }) => {
             padding: '10px',
             width: '100%',
             boxSizing: 'border-box',
-            margin: '10px 0'
+            margin: '10px 0',
+            border: '2px solid #ccc',
+            borderRadius: "5px",
           }}
         />
         <input
@@ -78,7 +80,9 @@ const SignupComponent = ({ isOpen, onClose }) => {
             padding: '10px',
             width: '100%',
             boxSizing: 'border-box',
-            margin: '10px 0'
+            margin: '10px 0',
+            border: '2px solid #ccc',
+            borderRadius: "5px",
           }}
         />
         <input
@@ -89,7 +93,9 @@ const SignupComponent = ({ isOpen, onClose }) => {
             padding: '10px',
             width: '100%',
             boxSizing: 'border-box',
-            margin: '10px 0'
+            margin: '10px 0',
+            border: '2px solid #ccc',
+            borderRadius: "5px",
           }}
         />
         <input
@@ -101,7 +107,9 @@ const SignupComponent = ({ isOpen, onClose }) => {
             padding: '10px',
             width: '100%',
             boxSizing: 'border-box',
-            margin: '10px 0'
+            margin: '10px 0',
+            border: '2px solid #ccc',
+            borderRadius: "5px",
           }}
         />
         <button onClick={handleSignUp} style={{

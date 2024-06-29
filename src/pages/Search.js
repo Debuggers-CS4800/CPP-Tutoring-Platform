@@ -4,44 +4,36 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import "./components/Search.css";
 import { FaSearch } from "react-icons/fa";
-import { doc, collection, getDocs, query, where, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
 function Search() {
   const [search, setSearch] = useState([]);
-  const [users, setUsers] = useState([]);
-  const collectionRef = collection(db, 'users');
+  const [tutors, setTutors] = useState([]);
+  const collectionRef = collection(db, 'tutors');
 
   // get function
   useEffect(() => {
-    const getUsers = async () => {
+    const getTutors = async () => {
       const querySnapshot = await getDocs(collectionRef);
       const items = [];
       querySnapshot.forEach((doc) => { items.push(doc.data()) });
-      setUsers(items);
+      setTutors(items);
     };
 
     try {
-      getUsers();
+      getTutors();
     } catch (error) {
       console.error(error);
     }
   });
 
-  // from firestore documentation
-  /*
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'users'), (querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setUsers(items);
-    });
-    
-    //return () => unsubscribe();
-  }); */
-  
+  const Divider = () => {
+    return (
+        <hr style={{ borderTop: "1px solid lightgrey" }}></hr>
+    );
+  };
+
   return (
     <div className="Search">
       <Header />
@@ -54,21 +46,26 @@ function Search() {
   		  </div>	
       </div> 
       <div className="grid-container">
-        {users
+        {tutors
           .filter((item) => {
-            if (item.isTutor) {
+            if (item.name.toString().toLowerCase() != '' ) {
               return search.toString().toLowerCase() === '' ? 
               item :
-              item.name.toString().toLowerCase().includes(search) || // allows for search of name, subject, or email
+              item.name.toString().toLowerCase().includes(search) || // allows for search of name, subject, mode or email
               item.subject.toString().toLowerCase().includes(search) ||
-              item.email.toString().toLowerCase().includes(search);
+              item.email.toString().toLowerCase().includes(search) ||
+              item.mode.toString().toLowerCase().includes(search);
             }
           })
           .map(item => (
             <div key={item.id} className="grid-item">
               <h2>{item.name}</h2>
-              <p>Subject: {item.subject}</p>
-              <p>Email: {item.email}</p>
+              <Divider />
+              <p><b>Subject: </b>{item.subject}</p>
+              <p><b>Experience: </b>{item.experience}</p>
+              <p><b>Bio: </b>{item.bio}</p>
+              <p><b>Email: </b>{item.email}</p>
+              <p><b>Mode: </b>{item.mode}</p>
             </div>
           ))}
       </div>

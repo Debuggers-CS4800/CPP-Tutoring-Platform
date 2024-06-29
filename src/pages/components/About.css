@@ -5,6 +5,8 @@
     justify-content: center;
     min-height: 100vh; 
     background-color: #f8f8f8; 
+    padding-bottom: 5%;
+    padding-top: 3%;
 }
 
 h1 {

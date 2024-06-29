@@ -3,6 +3,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Intro from './components/Intro';
 import Subject from './components/Subject';
+import engineeringImage from './components/s&e.png';
 
 function Home() {
   const userName = localStorage.getItem("userName"); // retrieves the user's name from localStorage
@@ -35,7 +36,7 @@ function Home() {
           description="CPP provides knowledgeable educators with advanced degrees in science and engineering disciplines. Our tutors specialize in guiding students through complex scientific and engineering concepts, offering personalized support to excel in coursework and projects."
           linkText="Find Science Tutors Here!"
           linkTo="/search"
-          subjectImage="https://lh3.googleusercontent.com/proxy/Ki7Ep4UGFLQUIYe3Q4BlL50qi7rqGiL9XMgDDJSRLsIc3aze82aPkIwCyjP3HkdQqJg9TPL57K8q8kZPk2Og46FMaulR7CrlaaKKA6plX4PECd3MCHoPgV5THdP2"
+          subjectImage={engineeringImage}
         />
       </main>
       <Footer />

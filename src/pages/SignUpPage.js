@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { auth, db } from '../firebase'; // Updated import path
 
@@ -9,6 +9,11 @@ const SignupComponent = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
+  const [experience, setExperience] = useState("");
+  const [mode, setMode] = useState("");
+  const [bio, setBio] = useState("");
+  const [isTutor, setIsTutor] = useState(false);
+  const [tutorProf, setTutorProf] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
@@ -24,7 +29,7 @@ const SignupComponent = ({ isOpen, onClose }) => {
           uid: user.uid,
           name,
           email,
-          subject,
+          //subject,
           createdAt: new Date(),
         });
 
@@ -44,6 +49,25 @@ const SignupComponent = ({ isOpen, onClose }) => {
       setError(authError.message);
     }
   };
+
+  const createTutor = async () =>{ //triggered after finishing tutor profile
+    setTutorProf(true);
+    const docRef = doc(collection(db, "tutors"));
+    try {
+      const docRef = await addDoc((collection(db, "tutors")), {
+        name,
+        email,
+        subject,
+        experience,
+        mode,
+        bio
+      });
+      console.log("Document written with ID: ", docRef.id);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -86,7 +110,7 @@ const SignupComponent = ({ isOpen, onClose }) => {
                 margin: '10px 0'
               }}
             />
-            <input
+            {/* <input
               placeholder="Subject"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
@@ -96,7 +120,7 @@ const SignupComponent = ({ isOpen, onClose }) => {
                 boxSizing: 'border-box',
                 margin: '10px 0'
               }}
-            />
+            /> */}
             <input
               placeholder="Email"
               value={email}
@@ -120,6 +144,16 @@ const SignupComponent = ({ isOpen, onClose }) => {
                 margin: '10px 0'
               }}
             />
+            <div className="Tutor" style={{
+                display:"flex", 
+                flexDirection:"row", 
+                alignItems:"center",}}>
+                <input type="checkbox" value={isTutor} name="tutor"onChange={() => setIsTutor(true)}/>
+                <label htmlFor="tutor">Tutor</label>
+
+                <input type="checkbox" value={isTutor} name="tutee" onChange={() => setIsTutor(false)}/>
+                <label htmlFor="tutee">Student</label>
+            </div>
             <button onClick={handleSignUp} style={{
               fontSize: "20px",
               padding: "10px 20px",
@@ -133,7 +167,8 @@ const SignupComponent = ({ isOpen, onClose }) => {
           </div>
         </div>
       )}
-      {success && (
+
+      {(success && !isTutor) && (
         <div style={{
           position: "fixed",
           top: "50%",
@@ -157,6 +192,71 @@ const SignupComponent = ({ isOpen, onClose }) => {
           }}>Ok</button>
         </div>
       )}
+        {/* tutor profile setup */}
+      {(isTutor && !tutorProf) && (
+        <div style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          background: "white",
+          padding: "20px",
+          borderRadius: "10px",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+          textAlign: "center"}}> 
+          <h2>Tutor Profile Setup</h2>
+          <input
+              placeholder="Subjects"
+              onChange={(e) => setSubject(e.target.value)}
+              style={{
+                padding: '10px',
+                width: '100%',
+                boxSizing: 'border-box',
+                margin: '10px 0'
+              }}
+            />
+            <input
+              placeholder="Experience/Qualifications"
+              onChange={(e) => setExperience(e.target.value)}
+              style={{
+                padding: '10px',
+                width: '100%',
+                boxSizing: 'border-box',
+                margin: '10px 0'
+              }}
+            />
+            <input
+              placeholder="Mode of Instruction/Location"
+              onChange={(e) => setMode(e.target.value)}
+              style={{
+                padding: '10px',
+                width: '100%',
+                boxSizing: 'border-box',
+                margin: '10px 0'
+              }}
+            />
+            <input
+              placeholder="Bio"
+              onChange={(e) => setBio(e.target.value)}
+              style={{
+                padding: '10px',
+                width: '100%',
+                boxSizing: 'border-box',
+                margin: '10px 0'
+              }}
+            />
+
+          <button onClick={createTutor} style={{
+            fontSize: "20px",
+            padding: "10px 20px",
+            marginTop: "10px",
+            border: '2px solid #ccc',
+            borderRadius: "5px",
+            background: "#f8f8f8",
+            cursor: "pointer",
+          }}>Finish</button>
+        </div>)}
+
     </>
   );
 };
